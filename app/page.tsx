@@ -10,8 +10,8 @@ export default function Home() {
       <div className="flex justify-center m-7 p-4">
         <header className="font-bold text-3xl">Third Space</header>
       </div>
-      <div className="flex flex-col justify-center items-center m-5 p-5 border-2 rounded-full ">
-        <h1>Sign up for our newsletter!</h1>
+      <div className="flex flex-col justify-center items-center m-5 p-5 border-2 rounded-full text-xl">
+        <h1 className="text-2xl">Sign up for our newsletter!</h1>
         <form action={addToMailList} className="m-3 p-3">
           <input
             type="text"
