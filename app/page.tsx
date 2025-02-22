@@ -1,3 +1,10 @@
+import { Black_Ops_One } from "next/font/google";
+
+const blackOpsOne = Black_Ops_One({
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export default function Home() {
   async function addToMailList(formData: FormData) {
     "use server";
@@ -8,7 +15,9 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-center m-7 p-4">
-        <header className="font-bold text-3xl">Third Space</header>
+        <header className={`font-bold text-3xl ${blackOpsOne.className}`}>
+          Third Space
+        </header>
       </div>
       <div className="flex flex-col justify-center items-center m-5 p-5 border-2 rounded-full text-xl">
         <h1 className="text-2xl">Sign up for our newsletter!</h1>
