@@ -1,4 +1,5 @@
 import { drizzle } from "drizzle-orm/libsql";
+import { eq } from "drizzle-orm";
 import { Black_Ops_One } from "next/font/google";
 import { usersTable } from "./database/schema";
 
@@ -24,7 +25,17 @@ export default function Home() {
       email: emailAddress,
     };
 
-    await db.insert(usersTable).values(user);
+    const alreadySignedUp =
+      (
+        await db
+          .select()
+          .from(usersTable)
+          .where(eq(usersTable.email, emailAddress))
+      ).length != 0;
+
+    if (!alreadySignedUp) {
+      await db.insert(usersTable).values(user);
+    }
   }
   return (
     <div className="flex flex-col items-center">
