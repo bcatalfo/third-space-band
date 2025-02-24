@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { drizzle } from "drizzle-orm/libsql";
+import { drizzle } from "drizzle-orm/better-sqlite3";
 import { eq } from "drizzle-orm";
 import { usersTable } from "./database/schema";
 
