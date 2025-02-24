@@ -1,16 +1,30 @@
+import { drizzle } from "drizzle-orm/libsql";
 import { Black_Ops_One } from "next/font/google";
+import { usersTable } from "./database/schema";
 
 const blackOpsOne = Black_Ops_One({
   weight: "400",
   subsets: ["latin"],
 });
 
+const db = drizzle(process.env.DB_FILE_NAME!);
+
 export default function Home() {
   async function addToMailList(formData: FormData) {
     "use server";
-    console.log(
-      `${formData.get("emailAddress")} signed up for the newsletter!`
-    );
+
+    const emailAddress = formData.get("emailAddress")?.toString();
+
+    if (emailAddress === undefined) {
+      return;
+    }
+    console.log(`${emailAddress} signed up for the newsletter!`);
+
+    const user: typeof usersTable.$inferInsert = {
+      email: emailAddress,
+    };
+
+    await db.insert(usersTable).values(user);
   }
   return (
     <div className="flex flex-col items-center">
