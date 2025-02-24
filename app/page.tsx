@@ -1,42 +1,21 @@
-import { drizzle } from "drizzle-orm/libsql";
-import { eq } from "drizzle-orm";
+"use client";
+
 import { Black_Ops_One } from "next/font/google";
-import { usersTable } from "./database/schema";
+import { useActionState } from "react";
+import { addToMailList } from "./actions";
+import { MailListState } from "./interface";
 
 const blackOpsOne = Black_Ops_One({
   weight: "400",
   subsets: ["latin"],
 });
 
-const db = drizzle(process.env.DB_FILE_NAME!);
-
 export default function Home() {
-  async function addToMailList(formData: FormData) {
-    "use server";
+  const [mailListState, formAction] = useActionState(
+    addToMailList,
+    MailListState.NotSignedUp
+  );
 
-    const emailAddress = formData.get("emailAddress")?.toString();
-
-    if (emailAddress === undefined) {
-      return;
-    }
-    console.log(`${emailAddress} signed up for the newsletter!`);
-
-    const user: typeof usersTable.$inferInsert = {
-      email: emailAddress,
-    };
-
-    const alreadySignedUp =
-      (
-        await db
-          .select()
-          .from(usersTable)
-          .where(eq(usersTable.email, emailAddress))
-      ).length != 0;
-
-    if (!alreadySignedUp) {
-      await db.insert(usersTable).values(user);
-    }
-  }
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-center m-7 p-4">
@@ -46,7 +25,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col justify-center items-center m-5 p-5 border-2 rounded-full text-xl">
         <h1 className="text-2xl">Sign up for our newsletter!</h1>
-        <form action={addToMailList} className="m-3 p-3">
+        <form action={formAction} className="m-3 mb-1 p-3">
           <input
             type="text"
             name="emailAddress"
@@ -59,6 +38,27 @@ export default function Home() {
             Sign Up
           </button>
         </form>
+        {mailListState == MailListState.AlreadySignedUp && (
+          <>
+            <p className="m-2 mt-1 p-2 text-red-400">
+              You already signed up with that email address
+            </p>
+          </>
+        )}
+        {mailListState == MailListState.SucessfullySignedUp && (
+          <>
+            <p className="m-2 mt-1 p-2">
+              You have successfully signed up to our mailing list.
+            </p>
+          </>
+        )}
+        {mailListState == MailListState.ErrorSigningUp && (
+          <>
+            <p className="m-2 mt-1 p-2 text-red-400">
+              An error occured an you were not signed up for the mailing list.
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
