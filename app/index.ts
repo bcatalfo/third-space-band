@@ -7,8 +7,6 @@ const db = drizzle(process.env.DB_FILE_NAME!);
 
 async function main() {
   const user: typeof usersTable.$inferInsert = {
-    name: "John",
-    age: 30,
     email: "john@example.com",
   };
 
@@ -29,7 +27,7 @@ async function main() {
   await db
     .update(usersTable)
     .set({
-      age: 31,
+      email: "john@google.com",
     })
     .where(eq(usersTable.email, user.email));
   console.log("User info updated!");
