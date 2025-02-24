@@ -38,5 +38,6 @@ jobs:
             cd ~/third-space-band
             git pull
             npm ci
+            npx drizzle-kit push
             npm run build
             pm2 restart third_space_band
