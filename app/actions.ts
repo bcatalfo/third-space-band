@@ -2,7 +2,7 @@
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { eq } from "drizzle-orm";
 import { MailListState } from "./interface";
-import { usersTable } from "./database/schema";
+import { emailList } from "./database/schema";
 
 const db = drizzle(process.env.DB_FILE_NAME!);
 export async function addToMailList(_: MailListState, formData: FormData) {
@@ -13,20 +13,16 @@ export async function addToMailList(_: MailListState, formData: FormData) {
   }
   console.log(`${emailAddress} signed up for the newsletter!`);
 
-  const user: typeof usersTable.$inferInsert = {
+  const user: typeof emailList.$inferInsert = {
     email: emailAddress,
   };
 
   const alreadySignedUp =
-    (
-      await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.email, emailAddress))
-    ).length != 0;
+    (await db.select().from(emailList).where(eq(emailList.email, emailAddress)))
+      .length != 0;
 
   if (!alreadySignedUp) {
-    await db.insert(usersTable).values(user);
+    await db.insert(emailList).values(user);
     return MailListState.SucessfullySignedUp;
   }
   return MailListState.AlreadySignedUp;
