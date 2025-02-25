@@ -10,7 +10,7 @@ const blackOpsOne = Black_Ops_One({
   subsets: ["latin"],
 });
 
-export default function Home() {
+export default function HomePage() {
   const [mailListState, formAction] = useActionState(
     addToMailList,
     MailListState.NotSignedUp
