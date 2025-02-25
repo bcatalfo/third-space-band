@@ -5,10 +5,7 @@ import { MailListState } from "./interface";
 import { usersTable } from "./database/schema";
 
 const db = drizzle(process.env.DB_FILE_NAME!);
-export async function addToMailList(
-  prevState: MailListState,
-  formData: FormData
-) {
+export async function addToMailList(_: MailListState, formData: FormData) {
   const emailAddress = formData.get("emailAddress")?.toString();
 
   if (emailAddress === undefined) {
