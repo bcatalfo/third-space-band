@@ -28,6 +28,8 @@ export async function addToMailList(_: MailListState, formData: FormData) {
   return MailListState.AlreadySignedUp;
 }
 
-export async function logInAdmin() {
+export async function logInAdmin(_: boolean, formData: FormData) {
+  const password = formData.get("password");
+  console.log(`user entered password ${password}`);
   return true;
 }
