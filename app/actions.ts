@@ -27,3 +27,7 @@ export async function addToMailList(_: MailListState, formData: FormData) {
   }
   return MailListState.AlreadySignedUp;
 }
+
+export async function logInAdmin() {
+  return true;
+}
