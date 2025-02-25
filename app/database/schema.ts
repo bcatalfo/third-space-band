@@ -4,3 +4,7 @@ export const emailList = sqliteTable("email_list", {
   id: int().primaryKey({ autoIncrement: true }),
   email: text().notNull().unique(),
 });
+
+export const adminPassword = sqliteTable("admin_password", {
+  password: text(),
+});
