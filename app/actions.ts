@@ -2,7 +2,7 @@
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { eq } from "drizzle-orm";
 import { MailListState } from "./interface";
-import { emailList } from "./database/schema";
+import { adminPassword, emailList } from "./database/schema";
 
 const db = drizzle(process.env.DB_FILE_NAME!);
 export async function addToMailList(_: MailListState, formData: FormData) {
@@ -29,7 +29,19 @@ export async function addToMailList(_: MailListState, formData: FormData) {
 }
 
 export async function logInAdmin(_: boolean, formData: FormData) {
-  const password = formData.get("password");
-  console.log(`user entered password ${password}`);
-  return true;
+  const userPassword = formData.get("password")?.toString();
+
+  if (userPassword === undefined) {
+    return false;
+  }
+
+  console.log(`user entered password ${userPassword}`);
+  return (
+    (
+      await db
+        .select()
+        .from(adminPassword)
+        .where(eq(adminPassword.password, userPassword))
+    ).length != 0
+  );
 }
