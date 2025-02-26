@@ -8,7 +8,7 @@ const db = drizzle(process.env.DB_FILE_NAME!);
 export default async function EmailList() {
   const emails = await db.select().from(emailList);
   return (
-    <table>
+    <table className="w-1/3">
       <caption>List of emails for the newsletter.</caption>
       <tbody>
         {emails.map(({ id, email }) => (
