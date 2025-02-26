@@ -16,12 +16,6 @@ export default async function EmailList() {
             <td>{email}</td>
           </tr>
         ))}
-        <tr>
-          <td>bcatalfo@gmail.com</td>
-        </tr>
-        <tr>
-          <td>scatalfo@gmail.com</td>
-        </tr>
       </tbody>
     </table>
   );
