@@ -2,6 +2,11 @@
 
 import { useActionState } from "react";
 import { logInAdmin } from "../actions";
+import { AR_One_Sans } from "next/font/google";
+
+const AROneSans = AR_One_Sans({
+  subsets: ["latin"],
+});
 
 export default function AdminPage({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, authenticateAction] = useActionState(
@@ -9,7 +14,9 @@ export default function AdminPage({ children }: { children: React.ReactNode }) {
     false
   );
   return (
-    <>
+    <div
+      className={`w-1/3 flex flex-col items-center gap-3 ${AROneSans.className}`}
+    >
       {!isAuthenticated && (
         <>
           <h1>Log in to gain access to the admin page</h1>
@@ -30,6 +37,6 @@ export default function AdminPage({ children }: { children: React.ReactNode }) {
           {children}
         </>
       )}
-    </>
+    </div>
   );
 }
