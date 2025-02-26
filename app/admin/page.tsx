@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { logInAdmin } from "../actions";
-import EmailList from "./email-list";
+import EmailList from "../email-list";
 
 export default function AdminPage() {
   const [isAuthenticated, authenticateAction] = useActionState(
