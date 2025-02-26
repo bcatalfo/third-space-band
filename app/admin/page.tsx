@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { logInAdmin } from "../actions";
+import EmailList from "./email-list";
 
 export default function AdminPage() {
   const [isAuthenticated, authenticateAction] = useActionState(
@@ -27,6 +28,7 @@ export default function AdminPage() {
       {isAuthenticated && (
         <>
           <h1>Hello admin!</h1>
+          <EmailList />
         </>
       )}
     </>
