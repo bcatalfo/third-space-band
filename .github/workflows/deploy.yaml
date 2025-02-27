@@ -37,6 +37,7 @@ jobs:
           script: |
             cd ~/third-space-band
             git pull
+            rm -rf node_modules .next
             npm ci
             npx drizzle-kit push
             npm run build
