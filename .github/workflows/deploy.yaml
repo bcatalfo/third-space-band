@@ -44,3 +44,4 @@ jobs:
             npm ci
             npm run build
             pm2 restart third_space_band
+            npm ci
