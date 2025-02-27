@@ -39,6 +39,7 @@ jobs:
             git checkout main
             git restore .
             git pull
+            source ~/.bashrc # this should load nvm
             nvm use 22
             npm ci
             npm run build
