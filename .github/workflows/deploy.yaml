@@ -42,6 +42,6 @@ jobs:
             # rm -rf node_modules # not usually necessary and takes a lot of time
             rm -rf .next
             npm ci
-            npx drizzle-kit push
             npm run build
+            npx drizzle-kit push
             pm2 restart third_space_band
