@@ -43,5 +43,4 @@ jobs:
             rm -rf .next
             npm ci
             npm run build
-            npx drizzle-kit push
             pm2 restart third_space_band
