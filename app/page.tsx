@@ -15,7 +15,7 @@ export default function HomePage() {
       <h1 className="text-2xl">Sign up for our newsletter!</h1>
       <form action={formAction} className="m-3 mb-1 p-3">
         <input
-          type="text"
+          type="email"
           name="emailAddress"
           className="border text-lg"
         ></input>
