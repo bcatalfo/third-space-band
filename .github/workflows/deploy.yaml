@@ -39,9 +39,6 @@ jobs:
             git checkout main
             git restore .
             git pull
-            # rm -rf node_modules # not usually necessary and takes a lot of time
-            rm -rf .next
             npm ci
             npm run build
             pm2 restart third_space_band
-            npm ci
