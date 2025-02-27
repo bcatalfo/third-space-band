@@ -35,7 +35,6 @@ export async function logInAdmin(_: boolean, formData: FormData) {
     return false;
   }
 
-  console.log(`user entered password ${userPassword}`);
   return (
     (
       await db
