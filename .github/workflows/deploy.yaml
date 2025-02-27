@@ -41,5 +41,5 @@ jobs:
             git pull
             npm ci
             npm run build
-            npm ci
+            node -v
             pm2 restart third_space_band
